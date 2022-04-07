@@ -13,3 +13,4 @@ youtube :mag_right: philosophers 42
 [🤔 Philosophers - @marmand 20.02.22](https://www.youtube.com/watch?v=WzsPbwIwtiw)  
 
 ### useful links
+visualizer https://nafuka11.github.io/philosophers-visualizer/
