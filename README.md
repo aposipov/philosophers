@@ -13,6 +13,7 @@ youtube :mag_right: philosophers 42
 [Лекция по проекту Philosofers (school 21) ч.1 @pdemocri](https://www.youtube.com/watch?v=6j4lwImwyT8)  
 [Лекция по проекту Philosofers (school 21) ч.2 @pdemocri](https://www.youtube.com/watch?v=2sv8LB0_uKg)  
 [🤔 Philosophers - @marmand 20.02.22](https://www.youtube.com/watch?v=WzsPbwIwtiw)  
+[CodeVault PlayList](https://www.youtube.com/playlist?list=PLfqABt5AS4FmuQf70psXrsMLEDQXNkLq2)
 
 ### useful links
 visualizer https://nafuka11.github.io/philosophers-visualizer/
