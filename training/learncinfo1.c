@@ -8,16 +8,19 @@
 #include <pthread.h>
 
 static int counter = 0;
-static int counter2 = 0;
+//static int counter2 = 0;
+pthread_mutex_t mutex;
 
 void *plus()
 {
 	int local;
 
-	local = counter2;
-	printf("plus=%d\n", counter2);
+	//pthread_mutex_lock(&mutex);
+	local = counter;
+	printf("plus=%d\n", counter);
 	local = local + 1;
-	counter2 = local;
+	counter = local;
+	//pthread_mutex_unlock(&mutex);
 	return NULL;
 }
 
@@ -25,15 +28,17 @@ void *minus()
 {
 	int local;
 
+	//pthread_mutex_lock(&mutex);
 	local = counter;
 	printf("minus=%d\n", counter);
 	local = local - 1;
 	counter = local;
+	//pthread_mutex_unlock(&mutex);
 	//sleep(5);
 	return NULL;
 }
 
-#define NUM_OF_THREADS 100
+#define NUM_OF_THREADS 200
 
 int main()
 {
@@ -41,7 +46,8 @@ int main()
 	size_t i = 0;
 
 	printf("counter-=%d\n", counter);
-	printf("counter+=%d\n", counter2);
+	//printf("counter+=%d\n", counter2);
+	pthread_mutex_init(&mutex, NULL);
 	while (i < NUM_OF_THREADS/2)
 	{
 		pthread_create(&threads[i], NULL, minus, NULL);
@@ -59,8 +65,9 @@ int main()
 		pthread_join(threads[i], NULL);
 		i++;
 	}
+	pthread_mutex_destroy(&mutex);
 	printf("counter- = %d\n", counter);
-	printf("counter+ = %d\n", counter2);
+	//printf("counter+ = %d\n", counter2);
 	return 0;
 
 }
