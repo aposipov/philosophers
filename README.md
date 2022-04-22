@@ -17,3 +17,7 @@ youtube :mag_right: philosophers 42
 
 ### useful links
 visualizer https://nafuka11.github.io/philosophers-visualizer/
+  
+https://pubs.opengroup.org/onlinepubs/7908799/xsh/pthread.h.html  
+https://learntutorials.net/ru/pthreads/topic/5669/%d0%bd%d0%b0%d1%87%d0%b0%d0%bb%d0%be-%d1%80%d0%b0%d0%b1%d0%be%d1%82%d1%8b-%d1%81-pthreads  
+https://answacode.com/questions/23250863/raznica-mezhdu-pthread-i-lpthread-pri-kompilyacii  
