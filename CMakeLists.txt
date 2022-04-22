@@ -3,4 +3,7 @@ project(philosophers C)
 
 set(CMAKE_C_STANDARD 99)
 
-add_executable(philosophers training/learncinfo1.c)
+add_executable(philosophers philo/src/philo.c
+		philo/src/ft_atoi.c)
+		#training/learncinfo1.c)
+		#training/codevault.c)

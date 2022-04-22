@@ -38,7 +38,7 @@ void *minus()
 	return NULL;
 }
 
-#define NUM_OF_THREADS 200
+#define NUM_OF_THREADS 50
 
 int main()
 {
@@ -50,18 +50,18 @@ int main()
 	pthread_mutex_init(&mutex, NULL);
 	while (i < NUM_OF_THREADS/2)
 	{
-		pthread_create(&threads[i], NULL, minus, NULL);
+		pthread_create(&threads[i], NULL, &minus, NULL);
 		i++;
 		//printf("min_i=%d", i);
 	}
 	while (i < NUM_OF_THREADS)
 	{
-		pthread_create(&threads[i], NULL, plus, NULL);
+		pthread_create(&threads[i], NULL, &plus, NULL);
 		i++;
 	}
+	i = 0;
 	while (i < NUM_OF_THREADS)
 	{
-		i = 0;
 		pthread_join(threads[i], NULL);
 		i++;
 	}
@@ -69,7 +69,6 @@ int main()
 	printf("counter- = %d\n", counter);
 	//printf("counter+ = %d\n", counter2);
 	return 0;
-
 }
 
 //#include <stdio.h>

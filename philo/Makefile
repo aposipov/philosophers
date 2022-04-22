@@ -3,9 +3,12 @@
 NAME = philo
 CC = gcc
 FLAGS = -Wall -Wextra -Werror
+FLAG1 = -fsanitize=thread
+FLAG2 = -phthread
 HEADER = ./inc/philo.h
 
-SRCS =	./src/philo.c
+SRCS =	./src/philo.c\
+		./src/ft_atoi.c
 
 OBJ = $(patsubst %.c, %.o, $(SRCS))
 
@@ -13,12 +16,12 @@ RED='\033[4;31m'
 GREEN= '\033[0;32m'
 NC='\033[0;0m'
 
-.PHONY:	all clean fclean re norm libft
+.PHONY:	all clean fclean re launch norm check
 
 all:	$(NAME)
 
 $(NAME):	$(OBJ)
-			$(CC) $(FLAGS) $(OBJ) $(libft_) -o $(NAME)
+			$(CC) $(FLAGS) $(OBJ) -o $(NAME)
 			@echo -e $(GREEN)Philo compiled!$(NC)
 
 %.o : %.c 	Makefile $(HEADER)
@@ -34,5 +37,12 @@ fclean:		clean
 
 re:			fclean all
 
+launch:		$(OBJ)
+			@$(CC) $(FLAGS) $(OBJ) -o $(NAME)
+			./philo 5 33 33 333
+
 norm:
 			@norminette $(HEADER) $(SRCS)
+
+check:
+			$(CC) $(FLAGS) $(FLAG1) $(OBJ) -o $(NAME)
