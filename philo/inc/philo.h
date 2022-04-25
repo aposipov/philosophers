@@ -27,26 +27,43 @@
 # define MAGENTA	"\033[35m"
 # define CYAN		"\033[36m"
 
-# define ms 1000
+//# define ms 1000
 
 typedef struct s_data{
-	int				num_phil;
-	int				time_die;
-	int				time_eat;
-	int				time_sleep;
+	int				num_ph;
+	int				tt_die;
+	int				tt_eat;
+	int				tt_sleep;
 	int				num_must_eat;
-	struct timeval	start;
+	int 			died;
+	long int		begin_time;
+	pthread_mutex_t *mutex;
+	pthread_mutex_t message; //
+	//struct timeval	start;
 }	t_data;
 
 typedef struct s_philo{
-	t_data			data;
-	pthread_t		*th;
+	int				num;
+	int 			count_eat;
+	int 			last_eat;
+	pthread_t		th;
 	pthread_mutex_t mutex;
-	int 			n;
-	//pthread_mutex_t	*left_fork;
-	//pthread_mutex_t	*right_fork;
+	pthread_mutex_t	*right_fork;
+	pthread_mutex_t	*left_fork;
+	t_data			*d_dinner;
 }	t_philo;
 
-int	ft_atoi(const char *str);
+void print(t_data *);
+
+int	ft_atoi(const char *);
+
+
+void create_phs(t_data *);
+
+//time
+long int	get_time(void);
+void	my_sleep(int ms);
+
+
 
 #endif

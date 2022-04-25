@@ -2,88 +2,57 @@
 
 #include "../inc/philo.h"
 
-void	get_fork2(t_philo *test)
+void	print(t_data *d_dinner)
 {
-	printf(MAGENTA"get_fork_2 %d\n"NC, test->n);
-}
-
-void	get_fork(t_philo *test)
-{
-	pthread_mutex_lock(&test->mutex);
-	printf(MAGENTA"get_fork %d\n"NC, test->n);
-	get_fork2(test);
-	pthread_mutex_unlock(&test->mutex);
-}
-
-void	*print2(t_philo *test)
-{
-	int i = 0;
-	int local;
-	//test->n = (t_philo *)malloc(sizeof(t_philo) * test->data.num_phil);
-	local = test->n;
-	printf(BLUE"phil-%d, ready\n"NC, test->n);
-	local = local + 1;
-	test->n = local;
-	get_fork(test);
-	//return NULL;
-}
-
-void	*print(t_philo *test)
-{
-	printf(GREEN"num of philo %d\n"NC, test->data.num_phil);
-	printf(RED"time to die %d\n"NC, test->data.time_die);
-	printf("time to eat %d\n", test->data.time_eat);
-	printf("time to sleep %d\n", test->data.time_sleep);
-	printf(YELLOW"time to must eat %d\n"NC, test->data.num_must_eat);
+	printf(GREEN"num of philo %d\n"NC, d_dinner->num_ph);
+	printf(RED"time to die %d\n"NC, d_dinner->tt_die);
+	printf("time to eat %d\n", d_dinner->tt_eat);
+	printf("time to sleep %d\n", d_dinner->tt_sleep);
+	printf(YELLOW"time to must eat %d\n"NC, d_dinner->num_must_eat);
+	printf(RED"dead %d\n"NC, d_dinner->died);
 	printf("ok\n");
 
-	return(0);
+	//return(0);
 }
 
-void create_th(t_philo *test)
+int check_arg(int argc, char **argv)
 {
-	int i = 0;
-	//pthread_mutex_t mutex;
+	if (ft_atoi(argv[1]) == -1)
+		return (-1);
+}
 
-	test->th = (t_philo *)malloc(sizeof(t_philo) * test->data.num_phil);
-	//test->n = (t_philo *)malloc(sizeof(t_philo) * test->data.num_phil);
-	pthread_mutex_init(&test->mutex, NULL);
-	while (i < test->data.num_phil)
-	{
+t_data 	*init_input(int argc, char **argv)
+{
+	t_data *d_dinner;
+	d_dinner = (t_data *)malloc(sizeof(t_data));
 
-		//printf("n = %d\n", test->n[i]);
-		pthread_create(&test->th[i], NULL, print2, test);
-		i++;
-	}
-	//usleep(1000000);
-//	i = 0;
-//	while (i < test->data.num_phil)
-//	{
-//		pthread_join(test->th[i], NULL);
-//		i++;
-//	}
+	d_dinner->num_ph = ft_atoi(argv[1]);
+	d_dinner->tt_die = ft_atoi(argv[2]);
+	d_dinner->tt_eat = ft_atoi(argv[3]);
+	d_dinner->tt_sleep = ft_atoi(argv[4]);
+	d_dinner->died = 0;
+	if (argc == 6)
+		d_dinner->num_must_eat = ft_atoi(argv[5]);
+	else
+		d_dinner->num_must_eat = -1;
+	return(d_dinner);
 }
 
 int main(int argc, char **argv)
 {
-	t_philo	*test;
+	t_data	*d_dinner;
 
-	test = (t_philo *) malloc(sizeof(t_philo));
 	if (argc < 5 || argc >6)
 	{
-		printf("check arguments!");
+		printf(RED"Input 5 or 6 arguments!"NC);
 		return (0);
 	}
-	test->data.num_phil = ft_atoi(argv[1]);
-	test->data.time_die = (ft_atoi(argv[2])) * ms;
-	test->data.time_eat = ft_atoi(argv[3]) * ms;
-	test->data.time_sleep = ft_atoi(argv[4]);
-	//if (argc == 5) // free eat
-	if (argc == 6)
-		test->data.num_must_eat = ft_atoi(argv[5]);
-	print(test);
-	create_th(test);
-	usleep(500000);
-
+	//d_dinner = (t_data *) malloc(sizeof(t_data));
+	// check_argc char and negative
+//	if (check_arg(argc, argv) == -1)
+//		return (0);
+	d_dinner = init_input(argc, argv);
+	print(d_dinner);
+	create_phs(d_dinner);
 	return (0);
 }
