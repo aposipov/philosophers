@@ -3,20 +3,12 @@
 //
 
 #include <stdio.h>
-
-typedef struct	s_test2{
-	int count2;
-}	t_test2;
-
-typedef struct	s_test{
-	int count;
-	t_test2 data;
-}	t_test;
+#include "../training/test.h"
 
 void	get_init(t_test *example)
 {
 	example->count = 101;
-	printf("test 2 = %d\n", example->data.count2);
+	printf("count 2 = %d\n", example->data.count2);
 	//return(example->count);
 }
 
@@ -43,6 +35,11 @@ int	main()
 	get_init2(&example);
 	printf("count2 = %d\n", example.count);
 	get_init3(&example);
+	printf("get init 3 %d\n", example.count);
+	get_init4(&example);
+	printf("get init 4 %d\n", example.count);
+	printf("get init 4 %d\n", example.data.count2);
+
 
 	return(0);
 }

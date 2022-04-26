@@ -26,6 +26,8 @@
 # define BLUE		"\033[34m"
 # define MAGENTA	"\033[35m"
 # define CYAN		"\033[36m"
+# define HZ1		"\033[37m"
+# define HZ2		"\033[38m"
 
 //# define ms 1000
 
@@ -39,31 +41,34 @@ typedef struct s_data{
 	long int		begin_time;
 	pthread_mutex_t *mutex;
 	pthread_mutex_t message; //
-	//struct timeval	start;
 }	t_data;
 
 typedef struct s_philo{
 	int				num;
 	int 			count_eat;
 	int 			last_eat;
-	pthread_t		th;
-	pthread_mutex_t mutex;
+	//pthread_t		th;
+	//pthread_mutex_t mutex;
 	pthread_mutex_t	*right_fork;
 	pthread_mutex_t	*left_fork;
-	t_data			*d_dinner;
+	t_data			d_dinner;
 }	t_philo;
 
-void print(t_data *);
+void print(t_data *); // del
 
 int	ft_atoi(const char *);
-
 
 void create_phs(t_data *);
 
 //time
 long int	get_time(void);
 void	my_sleep(int ms);
+int passed_time(long int begin_time);
 
-
+//ph do
+void ph_eats(t_philo *ph);
+void ph_sleeps(t_philo *ph);
+void ph_thinks(t_philo *ph);
+void ph_die(t_philo *ph);
 
 #endif
