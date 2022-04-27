@@ -27,9 +27,9 @@
 # define MAGENTA	"\033[35m"
 # define CYAN		"\033[36m"
 # define HZ1		"\033[37m"
-# define HZ2		"\033[38m"
+# define DC			"\033[41m"
 
-//# define ms 1000
+# define mls 1000
 
 typedef struct s_data{
 	int				num_ph;
@@ -69,6 +69,6 @@ int passed_time(long int begin_time);
 void ph_eats(t_philo *ph);
 void ph_sleeps(t_philo *ph);
 void ph_thinks(t_philo *ph);
-void ph_die(t_philo *ph);
+void ph_died(t_philo *ph);
 
 #endif

@@ -34,9 +34,6 @@ int check_arg(int argc, char **argv)
 
 void init_input(int argc, char **argv, t_data *d_dinner)
 {
-	//t_data *d_dinner;
-	//d_dinner = (t_data *)malloc(sizeof(t_data));
-
 	d_dinner->num_ph = ft_atoi(argv[1]);
 	d_dinner->tt_die = ft_atoi(argv[2]);
 	d_dinner->tt_eat = ft_atoi(argv[3]);
@@ -46,7 +43,6 @@ void init_input(int argc, char **argv, t_data *d_dinner)
 		d_dinner->num_must_eat = ft_atoi(argv[5]);
 	else
 		d_dinner->num_must_eat = -1;
-	//return(d_dinner);
 }
 
 int main(int argc, char **argv)
@@ -58,11 +54,9 @@ int main(int argc, char **argv)
 		printf(RED"Input 5 or 6 arguments!"NC);
 		return (0);
 	}
-	//d_dinner = (t_data *) malloc(sizeof(t_data));
 	// check_argc char and negative
 //	if (check_arg(argc, argv) == -1)
 //		return (0);
-	//d_dinner = init_input(argc, argv);
 	init_input(argc, argv, &d_dinner);
 	print(&d_dinner);
 	create_phs(&d_dinner);
