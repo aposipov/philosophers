@@ -47,8 +47,8 @@ typedef struct s_philo{
 	int				num;
 	int 			count_eat;
 	int 			last_eat;
-	//pthread_t		th;
-	//pthread_mutex_t mutex;
+	pthread_t		*th;
+	pthread_mutex_t *mutex;
 	pthread_mutex_t	*right_fork;
 	pthread_mutex_t	*left_fork;
 	t_data			d_dinner;

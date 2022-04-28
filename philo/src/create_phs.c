@@ -42,7 +42,7 @@ void	*philosoph(void *ph)
 	return (NULL);
 }
 
-static void	create_loop(t_data *d_dinner, t_philo *ph, pthread_t *th)
+static void	create_loop(t_data *d_dinner, t_philo *ph)
 {
 	int	i;
 
@@ -59,23 +59,23 @@ static void	create_loop(t_data *d_dinner, t_philo *ph, pthread_t *th)
 			ph[i].left_fork = &d_dinner->mutex[i + 1];
 		else
 			ph[i].left_fork = &d_dinner->mutex[0];
-		pthread_create(&th[i], NULL, &philosoph, (void *)(&ph[i]));
+		pthread_create(&ph->th[i], NULL, &philosoph, (void *)(&ph[i]));
 		i++;
 	}
 	usleep(100);
-	pthread_create(&th[i], NULL, &ph_died, (void *)(ph));
+	pthread_create(&ph->th[i], NULL, &ph_died, (void *)(ph));
 }
 
 void create_phs(t_data *d_dinner)
 {
 	t_philo	*ph;
-	pthread_t *th;
+	//pthread_t *th;
 	int			i;
 
 	i = 0;
 
 	ph = (t_philo *)malloc(d_dinner->num_ph * sizeof(t_philo));
-	th = (pthread_t *)malloc((d_dinner->num_ph + 1) * (sizeof(pthread_t)));
+	ph->th = (pthread_t *)malloc((d_dinner->num_ph + 1) * (sizeof(pthread_t)));
 	d_dinner->mutex = (pthread_mutex_t *)malloc((d_dinner->num_ph + 1) * sizeof(pthread_mutex_t));
 
 	//pthread_mutex_init(&d_dinner->message, NULL);
@@ -83,15 +83,15 @@ void create_phs(t_data *d_dinner)
 
 	//print(d_dinner);
 	//usleep(1000000);
-	create_loop(d_dinner, ph, th);
+	create_loop(d_dinner, ph);
 	i = 0;
 	while (i < d_dinner->num_ph)
 		pthread_mutex_destroy(&d_dinner->mutex[i++]);
 	i = 0;
 	while (i < d_dinner->num_ph)
-		pthread_join(th[i], NULL);
+		pthread_join(ph->th[i], NULL);
 	//pthread_mutex_destroy(&d_dinner->message);
-	free(th);
+	free(ph->th);
 	free(d_dinner->mutex);
 	free(ph);
 }
