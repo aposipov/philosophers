@@ -76,6 +76,7 @@ void ph_died(t_philo *ph)
 //				return (1);
 			}
 			i++;
+			my_sleep(1);
 		}
 		i = 1;
 	}
