@@ -14,13 +14,21 @@
 
 void ph_eats(t_philo *ph)
 {
-	if (ph->d_dinner.died == 1)
+	if (ph->d_dinner.tt_die <= passed_time((ph->d_dinner.begin_time -
+	ph->last_eat)))
 	{
-		//printf(DC"%d PH is DIED! eats\n"NC, ph->num);
-		//print_log(ph, 4);
-		//exit (0);
-		return ;
+		print_log(ph, 4);
+		ph->died = 1;
+		return;
 	}
+//	if (ph->died == 1)
+//	{
+//		//printf(DC"%d PH is DIED! eats\n"NC, ph->num);
+//		print_log(ph, 4);
+//		//exit (0);
+//		//pthread_detach()
+//		return ;
+//	}
 	//printf(GREEN"%d ph %d is eating\n"NC, passed_time(ph->d_dinner.begin_time),ph->num);
 	print_log(ph, 1);
 	my_sleep((int)ph->d_dinner.tt_eat);
@@ -31,13 +39,13 @@ void ph_eats(t_philo *ph)
 
 void ph_sleeps(t_philo *ph)
 {
-	if (ph->d_dinner.died == 1)
-	{
-		//printf(DC"%d PH is DIED! sleeps\n"NC, ph->num);
-		//print_log(ph, 4);
-		//exit (0);
-		return ;
-	}
+//	if (ph->d_dinner.died == 1)
+//	{
+//		//printf(DC"%d PH is DIED! sleeps\n"NC, ph->num);
+//		//print_log(ph, 4);
+//		//exit (0);
+//		return ;
+//	}
 	//printf(BLUE"%d ph %d is sleeping\n"NC, passed_time(ph->d_dinner.begin_time), ph->num);
 	print_log(ph, 2);
 	my_sleep((int)ph->d_dinner.tt_sleep);
@@ -46,13 +54,13 @@ void ph_sleeps(t_philo *ph)
 
 void ph_thinks(t_philo *ph)
 {
-	if (ph->d_dinner.died == 1)
-	{
-		//printf(DC"%d PH is DIED! thinks\n"NC, ph->num);
-		//print_log(ph, 4);
-		//exit (0);
-		return ;
-	}
+//	if (ph->d_dinner.died == 1)
+//	{
+//		//printf(DC"%d PH is DIED! thinks\n"NC, ph->num);
+//		//print_log(ph, 4);
+//		//exit (0);
+//		return ;
+//	}
 	//printf(CYAN"%d ph %d is thinking\n"NC, passed_time(ph->d_dinner.begin_time), ph->num);
 	print_log(ph, 3);
 }
@@ -65,18 +73,18 @@ void ph_died(t_philo *ph)
 	{
 		while (i < ph->d_dinner.num_ph)
 		{
-			if (ph[i].d_dinner.tt_die + 1 <= passed_time((ph[i].d_dinner
-			.begin_time - ph[i].last_eat )))
+			if (ph[i].d_dinner.tt_die + 1 <= passed_time((ph[i].d_dinner.begin_time - ph[i].last_eat)))
 			{
-				ph[i].d_dinner.died = 1;
+				ph[i].died = 1;
 				print_log(ph, 4);
+				//break ;
 				//exit(0);
-				return (NULL);
+				//return (NULL);
 			}
 			i++;
 			my_sleep(1);
 		}
 		i = 1;
 	}
-	return (NULL);
+	//return (NULL);
 }
