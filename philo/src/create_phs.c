@@ -52,6 +52,7 @@ static void	create_loop(t_data *d_dinner, t_philo *ph)
 	{
 		pthread_mutex_init(&ph->fork[i], NULL);
 		ph[i].d_dinner = *d_dinner;
+		//ph[i].d_dinner.begin_time = get_time();
 		ph[i].num = i + 1;
 		ph[i].right_fork = &ph->fork[i];
 		ph[i].last_eat = 0;
@@ -81,7 +82,7 @@ void create_phs(t_data *d_dinner)
 
 	pthread_mutex_init(&ph->message, NULL);
 	d_dinner->begin_time = get_time();
-	//print(d_dinner);
+	print(d_dinner);
 	//usleep(1000000);
 	create_loop(d_dinner, ph);
 	i = 0;

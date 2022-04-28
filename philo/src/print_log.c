@@ -6,6 +6,8 @@
 
 void print_log(t_philo *ph_tmp, int n)
 {
+	int time;
+
 	pthread_mutex_lock(&ph_tmp->message);
 	if (n == 11)
 		printf("%d %d ph take left_fork %d\n", passed_time(ph_tmp->d_dinner
@@ -23,6 +25,10 @@ void print_log(t_philo *ph_tmp, int n)
 		printf(CYAN"%d ph %d is thinking\n"NC, passed_time(ph_tmp->d_dinner
 		.begin_time), ph_tmp->num);
 	else if (n == 4)
+	{
+		time = passed_time(ph_tmp->d_dinner.begin_time)- ph_tmp->last_eat;
+		printf(RED"%d ph passed time = %d\n"NC, ph_tmp->num, time);
 		printf(DC"%d PH is DIED!\n"NC, ph_tmp->num);
+	}
 	pthread_mutex_unlock(&ph_tmp->message);
 }
