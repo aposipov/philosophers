@@ -24,18 +24,19 @@ void	*philosoph(void *ph)
 	.num_must_eat)
 	{
 		pthread_mutex_lock(ph_tmp->left_fork);
-		printf("%d %d ph take left_fork %d\n", passed_time(ph_tmp->d_dinner
-		.begin_time), ph_tmp->num, ph_tmp->left_fork);
+		print_log(ph_tmp, 11);
+		//printf("%d %d ph take left_fork %d\n", passed_time(ph_tmp->d_dinner.begin_time), ph_tmp->num, ph_tmp->left_fork);
 		pthread_mutex_lock(ph_tmp->right_fork);
-		printf("%d %d ph take right_fork %d\n", passed_time(ph_tmp->d_dinner
-		.begin_time), ph_tmp->num, ph_tmp->right_fork);
+		print_log(ph_tmp, 12);
+		//printf("%d %d ph take right_fork %d\n", passed_time(ph_tmp->d_dinner.begin_time), ph_tmp->num, ph_tmp->right_fork);
+
 		ph_eats(ph_tmp);
-		printf("%d %d ph PUT left_fork %d\n", passed_time(ph_tmp->d_dinner
-		.begin_time), ph_tmp->num, ph_tmp->left_fork);
+
+		printf("%d %d ph PUT left_fork %d\n", passed_time(ph_tmp->d_dinner.begin_time), ph_tmp->num, ph_tmp->left_fork);
 		pthread_mutex_unlock(ph_tmp->left_fork);
-		printf("%d %d ph PUT right_fork %d\n", passed_time(ph_tmp->d_dinner
-		.begin_time), ph_tmp->num, ph_tmp->right_fork);
+		printf("%d %d ph PUT right_fork %d\n", passed_time(ph_tmp->d_dinner.begin_time), ph_tmp->num, ph_tmp->right_fork);
 		pthread_mutex_unlock(ph_tmp->right_fork);
+
 		ph_sleeps(ph_tmp);
 		ph_thinks(ph_tmp);
 	}
@@ -69,14 +70,12 @@ static void	create_loop(t_data *d_dinner, t_philo *ph)
 void create_phs(t_data *d_dinner)
 {
 	t_philo	*ph;
-	//pthread_t *th;
-	int			i;
+	int		i;
 
 	i = 0;
 
 	ph = (t_philo *)malloc(d_dinner->num_ph * sizeof(t_philo));
 	ph->th = (pthread_t *)malloc((d_dinner->num_ph + 1) * (sizeof(pthread_t)));
-	//d_dinner->mutex = (pthread_mutex_t *)malloc((d_dinner->num_ph + 1) *sizeof(pthread_mutex_t));
 	ph->fork = (pthread_mutex_t *)malloc((d_dinner->num_ph) * sizeof
 			(pthread_mutex_t));
 

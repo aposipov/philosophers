@@ -7,7 +7,8 @@ add_executable(philosophers philo/src/philo.c
 		philo/src/ft_atoi.c
 		philo/src/create_phs.c
 		philo/src/time.c
-		philo/src/ph_do.c)
+		philo/src/ph_do.c
+		philo/src/print_log.c)
 
 #add_executable(philosophers training/test.c
 #		training/test2.c)

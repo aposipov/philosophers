@@ -39,8 +39,6 @@ typedef struct s_data{
 	int				num_must_eat;
 	int 			died;
 	long int		begin_time;
-	//pthread_mutex_t *mutex;
-	//pthread_mutex_t message; //
 }	t_data;
 
 typedef struct s_philo{
@@ -57,6 +55,8 @@ typedef struct s_philo{
 
 void print(t_data *); // del
 
+//print log
+void print_log(t_philo *, int);
 int	ft_atoi(const char *);
 
 void create_phs(t_data *);
