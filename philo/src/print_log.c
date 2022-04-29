@@ -4,7 +4,7 @@
 
 #include "../inc/philo.h"
 
-void print_log(t_philo *ph_tmp, int n)
+int print_log(t_philo *ph_tmp, int n)
 {
 	int time;
 
@@ -31,4 +31,5 @@ void print_log(t_philo *ph_tmp, int n)
 		printf(DC"%d PH is DIED!\n"NC, ph_tmp->num);
 	}
 	pthread_mutex_unlock(&ph_tmp->message);
+	return (0);
 }

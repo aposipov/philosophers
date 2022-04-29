@@ -24,19 +24,18 @@ void	*philosoph(void *ph)
 	.num_must_eat)
 	{
 		pthread_mutex_lock(ph_tmp->left_fork);
-		print_log(ph_tmp, 11);
+		if (print_log(ph_tmp, 11))
+			return (NULL);
 		//printf("%d %d ph take left_fork %d\n", passed_time(ph_tmp->d_dinner.begin_time), ph_tmp->num, ph_tmp->left_fork);
 		pthread_mutex_lock(ph_tmp->right_fork);
 		print_log(ph_tmp, 12);
 		//printf("%d %d ph take right_fork %d\n", passed_time(ph_tmp->d_dinner.begin_time), ph_tmp->num, ph_tmp->right_fork);
 
 		ph_eats(ph_tmp);
-
 		//printf("%d %d ph PUT left_fork %d\n", passed_time(ph_tmp->d_dinner.begin_time), ph_tmp->num, ph_tmp->left_fork);
 		pthread_mutex_unlock(ph_tmp->left_fork);
 		//printf("%d %d ph PUT right_fork %d\n", passed_time(ph_tmp->d_dinner.begin_time), ph_tmp->num, ph_tmp->right_fork);
 		pthread_mutex_unlock(ph_tmp->right_fork);
-
 		ph_sleeps(ph_tmp);
 		ph_thinks(ph_tmp);
 	}
@@ -57,6 +56,7 @@ static void	create_loop(t_data *d_dinner, t_philo *ph)
 		ph[i].right_fork = &ph->fork[i];
 		ph[i].last_eat = 0;
 		ph[i].count_eat = 0;
+		ph[i].died = &ph->flag;
 		if (i != d_dinner->num_ph - 1) //
 			ph[i].left_fork = &ph->fork[i + 1];
 		else
@@ -65,6 +65,7 @@ static void	create_loop(t_data *d_dinner, t_philo *ph)
 		i++;
 	}
 	usleep(100);
+	//ph_died(ph);
 	//pthread_create(&ph->th[i], NULL, &ph_died, (void *)(ph));
 }
 
@@ -91,9 +92,7 @@ void create_phs(t_data *d_dinner)
 	i = 0;
 	//while (i < d_dinner->num_ph)
 	pthread_join(ph->th[i], NULL);
-	printf("after join\n");
 	pthread_mutex_destroy(&ph->message);
-	printf("after destroy\n");
 	free(ph->th);
 	free(ph->fork);
 	free(ph);
