@@ -56,8 +56,8 @@ int main(int argc, char **argv)
 		return (0);
 	}
 	// check_argc char and negative
-	if (check_arg(argc, argv) == -1)
-		return (0);
+	//if (check_arg(argc, argv) == -1)
+	//	return (0);
 	init_input(argc, argv, &d_dinner);
 	print(&d_dinner);
 	create_phs(&d_dinner);

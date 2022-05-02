@@ -14,14 +14,19 @@
 
 void ph_eats(t_philo *ph)
 {
-	if (ph->d_dinner.tt_die <= passed_time(ph->d_dinner.begin_time) -
-	ph->last_eat)
-	{
-		ph->died = 1;
-		print_log(ph, 4);
+	if (*ph->died == 1)
+		return;
+//	if (ph->d_dinner.tt_die <= passed_time(ph->d_dinner.begin_time) -
+//	ph->last_eat)
+//	{
+//		printf("111\n");
+//		ph->flag = 1;
+//		printf("222\n");
+//		print_log(ph, 4);
+//		usleep(10000);
 //		return ;
-		exit(0);
-	}
+//		//exit(0);
+//	}
 	//if (*ph->died == 1)
 //	{
 //		print_log(ph, 4);
@@ -60,7 +65,8 @@ void ph_died(t_philo *ph)
 		i = 0;
 		while (i < ph->d_dinner.num_ph)
 		{
-			if (ph[i].d_dinner.tt_die < passed_time(ph[i].d_dinner.begin_time) - ph[i].last_eat)
+			if (ph[i].d_dinner.tt_die + 1 < passed_time(ph[i].d_dinner
+			.begin_time) - ph[i].last_eat)
 			{
 //				printf("%d ph begin = %d last eat = %d\n", ph[i].num, ph[i].d_dinner.begin_time, ph[i].last_eat);
 				//ph[i].died = 1;
