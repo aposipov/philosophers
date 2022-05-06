@@ -26,10 +26,10 @@ void	my_sleep(int ms)  // rewrite??
 
 	start = get_time();
 	while (get_time() - start < ms)
-		usleep(10);
+		usleep(1);
 }
 
 int	passed_time(long int begin_time)
 {
-	return ((int)(get_time() - begin_time));
+	return (int)(get_time() - begin_time);
 }

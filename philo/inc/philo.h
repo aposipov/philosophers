@@ -31,10 +31,6 @@
 
 # define mls 1000
 
-typedef struct s_died{
-	int flag;
-}	t_died;
-
 typedef struct s_data{
 	int				num_ph;
 	int				tt_die;
