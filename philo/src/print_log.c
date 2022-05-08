@@ -13,7 +13,7 @@ int print_log(t_philo *ph_tmp, int n)
 	{
 		time = passed_time(ph_tmp->d_dinner.begin_time)- ph_tmp->last_eat;
 		printf(RED"%d ph passed time = %d\n"NC, ph_tmp->num, time);
-		printf(DC"%d PH is DIED!\n"NC, ph_tmp->num);
+		printf(RED"%d PH is DIED!\n"NC, ph_tmp->num);
 		pthread_mutex_unlock(&ph_tmp->message);
 		return (1);
 	}
@@ -26,8 +26,7 @@ int print_log(t_philo *ph_tmp, int n)
 		printf("%d %d ph take right_fork %d\n", passed_time(ph_tmp->d_dinner
 																	.begin_time), ph_tmp->num, ph_tmp->right_fork);
 	else if (n == 1)
-		printf(GREEN"%d ph %d is eating\n"NC, passed_time(ph_tmp->d_dinner
-																  .begin_time),ph_tmp->num);
+		printf(GREEN"%d ph %d is eating\n"NC, passed_time(ph_tmp->d_dinner.begin_time),ph_tmp->num);
 	else if (n == 2)
 		printf(BLUE"%d ph %d is sleeping\n"NC, passed_time(ph_tmp->d_dinner
 																   .begin_time), ph_tmp->num);

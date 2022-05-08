@@ -18,9 +18,9 @@ void	*philosoph(void *ph)
 
 	ph_tmp = ph;
 	if (ph_tmp->num % 2 == 0)
-		//usleep(50);
 		my_sleep((ph_tmp->d_dinner.tt_eat)); //
-	while (*ph_tmp->died != 1 && ph_tmp->count_eat != ph_tmp->d_dinner.num_must_eat)
+	while (ph_tmp->flag != 1 && ph_tmp->count_eat != ph_tmp->d_dinner
+	.num_must_eat)
 	{
 		pthread_mutex_lock(ph_tmp->left_fork);
 		if (print_log(ph_tmp, 11))
@@ -51,7 +51,6 @@ static void	create_loop(t_data *d_dinner, t_philo *ph)
 	{
 		pthread_mutex_init(&ph->fork[i], NULL);
 		ph[i].d_dinner = *d_dinner;
-		//ph[i].d_dinner.begin_time = get_time();
 		ph[i].num = i + 1;
 		ph[i].right_fork = &ph->fork[i];
 		ph[i].last_eat = 0;
@@ -75,7 +74,6 @@ void create_phs(t_data *d_dinner)
 	int		i;
 
 	i = 0;
-
 	ph = (t_philo *)malloc(d_dinner->num_ph * sizeof(t_philo));
 	ph->th = (pthread_t *)malloc((d_dinner->num_ph + 1) * (sizeof(pthread_t)));
 	ph->fork = (pthread_mutex_t *)malloc((d_dinner->num_ph) * sizeof
@@ -83,14 +81,12 @@ void create_phs(t_data *d_dinner)
 
 	pthread_mutex_init(&ph->message, NULL);
 	d_dinner->begin_time = get_time();
-	print(d_dinner);
-	//usleep(1000000);
+	//print(d_dinner);
 	create_loop(d_dinner, ph);
 	i = 0;
 	while (i < d_dinner->num_ph)
 		pthread_mutex_destroy(&ph->fork[i++]);
 	i = 0;
-	//while (i < d_dinner->num_ph)
 	pthread_join(ph->th[i], NULL);
 	pthread_mutex_destroy(&ph->message);
 	free(ph->th);
