@@ -15,9 +15,9 @@
 void ph_eats(t_philo *ph)
 {
 	if (ph->flag == 1)
-		return;
+		return ;
 	if (print_log(ph, 1))
-		return NULL;
+		return ;
 	ph->last_eat = passed_time(ph->d_dinner.begin_time); // ????
 	my_sleep((int)ph->d_dinner.tt_eat);
 	ph->count_eat++;
@@ -28,7 +28,7 @@ void ph_sleeps(t_philo *ph)
 	if (ph->flag == 1)
 		return ;
 	if (print_log(ph, 2))
-		return NULL;
+		return ;
 	my_sleep((int)ph->d_dinner.tt_sleep);
 }
 
@@ -38,7 +38,7 @@ void ph_thinks(t_philo *ph)
 	if (ph->flag == 1)
 		return ;
 	if (print_log(ph, 3))
-		return NULL;
+		return ;
 }
 
 void ph_died(t_philo *ph)
@@ -57,7 +57,7 @@ void ph_died(t_philo *ph)
 				return ;
 			}
 			i++;
-			my_sleep((int)(ph[i].d_dinner.tt_die));
+			my_sleep(1);
 		}
 	}
 }

@@ -75,19 +75,24 @@ void create_phs(t_data *d_dinner)
 
 	i = 0;
 	ph = (t_philo *)malloc(d_dinner->num_ph * sizeof(t_philo));
-	ph->th = (pthread_t *)malloc((d_dinner->num_ph + 1) * (sizeof(pthread_t)));
-	ph->fork = (pthread_mutex_t *)malloc((d_dinner->num_ph) * sizeof
-			(pthread_mutex_t));
+	ph->th = (pthread_t *)malloc((d_dinner->num_ph) * (sizeof(pthread_t)));
+	ph->fork = (pthread_mutex_t *)malloc((d_dinner->num_ph) * sizeof(pthread_mutex_t));
 
 	pthread_mutex_init(&ph->message, NULL);
 	d_dinner->begin_time = get_time();
 	//print(d_dinner);
 	create_loop(d_dinner, ph);
+	printf("after loop\n");
 	i = 0;
 	while (i < d_dinner->num_ph)
 		pthread_mutex_destroy(&ph->fork[i++]);
-	i = 0;
-	pthread_join(ph->th[i], NULL);
+	printf("after destroy\n");
+//	while ((i < d_dinner->num_ph))
+//	{
+//		pthread_join(ph->th[i], NULL);
+//		i++;
+//	}
+	printf("after join\n");
 	pthread_mutex_destroy(&ph->message);
 	free(ph->th);
 	free(ph->fork);
