@@ -12,7 +12,7 @@
 
 #include "../inc/philo.h"
 
-int	ft_atoi(const char *nptr) //long?
+int	ft_atoi(const char *nptr)
 {
 	int			i;
 	int			sign;
@@ -36,5 +36,5 @@ int	ft_atoi(const char *nptr) //long?
 		if ((old < 0 && num > 0) || (old > 0 && num < 0))
 			return ((sign == 1) * -1);
 	}
-	return (num * sign);
+	return (int)(num * sign);
 }

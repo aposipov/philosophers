@@ -15,7 +15,10 @@
 void ph_eats(t_philo *ph)
 {
 	if (ph->flag == 1)
+	{
+		//pthread_join(*ph->th, NULL);
 		return ;
+	}
 	if (print_log(ph, 1))
 		return ;
 	ph->last_eat = passed_time(ph->d_dinner.begin_time); // ????
@@ -50,9 +53,16 @@ void ph_died(t_philo *ph)
 		i = 0;
 		while (i < ph->d_dinner.num_ph)
 		{
+//			if (ph[i].count_eat == ph[i].d_dinner.num_must_eat)
+//			{
+//				//ph[i].eat_all++;
+//				//if (ph[i].eat_all == ph->num)
+//				//my_sleep(100);
+//				return ;
+//			}
 			if (ph[i].d_dinner.tt_die + 1  <= passed_time(ph[i].d_dinner.begin_time) - ph[i].last_eat)
 			{
-				*ph[i].died = 1;
+				ph[i].flag = 1;
 				print_log(ph, 4);
 				return ;
 			}

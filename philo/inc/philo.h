@@ -43,6 +43,7 @@ typedef struct s_philo{
 	int				*died;
 	int				flag;
 	int				last_eat;
+	int 			eat_all;
 	pthread_t		*th;
 	pthread_mutex_t	*fork;
 	pthread_mutex_t	message;
@@ -70,5 +71,6 @@ void		ph_died(t_philo *ph);
 
 //debug
 void		print(t_data *d_dinner);
+void		print_put(t_philo *ph_tmp, int c);
 
 #endif

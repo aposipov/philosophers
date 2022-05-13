@@ -20,7 +20,7 @@ long int get_time(void)
 	return (t_start.tv_sec * 1000 + t_start.tv_usec / 1000);
 }
 
-void	my_sleep(int ms)  // rewrite??
+void	my_sleep(int ms)
 {
 	long	start;
 
