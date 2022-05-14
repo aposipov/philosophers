@@ -40,8 +40,8 @@ int print_log(t_philo *ph_tmp, int n)
 		printf(GREEN"%d ph %d is eating\n"NC, passed_time(ph_tmp->d_dinner.begin_time),ph_tmp->num);
 		printf(MAGENTA"ph %d eat count = %d; flag died = %d\n"NC,
 			   ph_tmp->num, ph_tmp->count_eat + 1, *ph_tmp->died);
-		printf(MAGENTA"ph %d adr_flag = %p\n"NC, ph_tmp->num, &ph_tmp->flag);
-		printf(MAGENTA"ph %d adr_died = %p\n"NC, ph_tmp->num, ph_tmp->died);
+		//printf(MAGENTA"ph %d adr_flag = %p\n"NC, ph_tmp->num, &ph_tmp->flag);
+		//printf(MAGENTA"ph %d adr_died = %p\n"NC, ph_tmp->num, ph_tmp->died);
 	}
 	else if (n == 2)
 		printf(BLUE"%d ph %d is sleeping\n"NC, passed_time(ph_tmp->d_dinner.begin_time), ph_tmp->num);
