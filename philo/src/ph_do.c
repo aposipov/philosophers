@@ -65,7 +65,7 @@ void ph_died(t_philo *ph)
 	{
 		while (i < ph->d_dinner.num_ph)
 		{
-			if (ph[i].d_dinner.tt_die + 1 <= passed_time((ph[i].d_dinner.begin_time -ph[i].last_eat )))
+			if (ph[i].d_dinner.tt_die + 1 <= passed_time(ph[i].d_dinner.begin_time) - ph[i].last_eat )
 			{
 //				printf("ph %d tt_die = %d, passed = %d\n", ph->num, ph[i].d_dinner.tt_die,
 //					   passed_time((int)(ph[i].d_dinner.begin_time-ph[i].last_eat)));
