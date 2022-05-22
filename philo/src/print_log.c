@@ -24,7 +24,7 @@ int print_log(t_philo *ph_tmp, int n)
 		printf(RED"%d %d ph passed time = %d\n"NC, passed_time
 		(ph_tmp->d_dinner.begin_time), ph_tmp->num, time);
 		printf(RED"%d PH is DIED! FLAG = %d\n"NC, ph_tmp->num, *ph_tmp->died);
-//		pthread_join(*ph_tmp->th, NULL);
+		//pthread_detach(*ph_tmp->th);
 		pthread_mutex_unlock(&ph_tmp->message);
 		return (0);
 	}

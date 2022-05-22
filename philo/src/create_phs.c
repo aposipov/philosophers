@@ -84,6 +84,11 @@ void create_phs(t_data *d_dinner)
 	d_dinner->begin_time = get_time();
 	//print(d_dinner);
 	create_loop(d_dinner, ph);
+	if (ph->d_dinner.num_ph == 1)
+	{
+//		pthread_join(ph->th[0], NULL);
+		return ;
+	}
 	//i = 0;
 	pthread_join(ph->th[i], NULL);
 	i = 0;
