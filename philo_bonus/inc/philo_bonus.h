@@ -22,22 +22,22 @@ typedef struct s_data
 	int		*pid;
 	int		id_ph;
 	int		nbr_philo;
-	int		time_die;
-	int		time_eat;
-	int		time_sleep;
+	int		tt_die;
+	int		tt_eat;
+	int		tt_sleep;
 	int		must_eat;
 	int		start_time;
 	int		time_left;
 	sem_t	*sem_die;
-	sem_t	*sem_write;
+	sem_t	*sem_print;
 	sem_t	*sem_fork;
 	sem_t	*sem_odd;
 }				t_data;
 
 // * PROCESSES UTILS * //
 
-void	ft_kill_child(t_data *data, int def);
-void	ft_sem_close(t_data *data, int def);
+//void	ft_kill_child(t_data *data, int def);
+//void	ft_sem_close(t_data *data, int def);
 void	ft_check_dead(t_data *data);
 void	ft_meal_check(t_data *data);
 void	ft_child_set(t_data *data);

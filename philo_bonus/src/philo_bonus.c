@@ -8,7 +8,7 @@ void	ft_sem_close(t_data *data, int def)
 {
 	sem_close(data->sem_die);
 	sem_close(data->sem_fork);
-	sem_close(data->sem_write);
+	sem_close(data->sem_print);
 	sem_close(data->sem_odd);
 	if (def == 1)
 		free(data->pid);
