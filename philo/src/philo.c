@@ -12,24 +12,48 @@
 
 #include "../inc/philo.h"
 
-void	print(t_data *d_dinner)
+int valid_input(t_data *d_dinner)
 {
-	printf(GREEN"num of philo %d\n"NC, d_dinner->num_ph);
-	printf(RED"time to die %d\n"NC, d_dinner->tt_die);
-	printf("time to eat %d\n", d_dinner->tt_eat);
-	printf("time to sleep %d\n", d_dinner->tt_sleep);
-	printf(YELLOW"time to must eat %d\n"NC, d_dinner->num_must_eat);
-	printf(RED"dead %d\n"NC, d_dinner->died);
-	printf("begin time = %ld\n", d_dinner->begin_time);
-	printf("ok\n");
-
-	//return(0);
+	if (d_dinner->num_ph == 0)
+	{
+		printf(RED"ph must be more than 0\n"NC);
+		return(-1);
+	}
+	if (d_dinner->num_must_eat == 0)
+	{
+		printf(RED"time must eat more tnan 0\n"NC);
+		return (-1);
+	}
+	return (0);
 }
 
-int check_arg(int argc, char **argv)
+int check_digit(const char *str)
 {
-	if (ft_atoi(argv[1]) == -1)
-		return (-1);
+	int i = 0;
+
+	while (str[i] != '\0')
+	{
+		if (str[i] < '0' || str[i] > '9')
+			return (-1);
+		i++;
+	}
+	return (0);
+}
+
+int check_arg(char **argv)
+{
+	int i = 1;
+
+	while (argv[i] != NULL)
+	{
+		if (check_digit(argv[i]) == -1)
+		{
+			printf(RED"Check your arguments!\n"NC);
+			return (-1);
+		}
+		i++;
+	}
+	return (0);
 }
 
 void init_input(int argc, char **argv, t_data *d_dinner)
@@ -38,7 +62,7 @@ void init_input(int argc, char **argv, t_data *d_dinner)
 	d_dinner->tt_die = ft_atoi(argv[2]);
 	d_dinner->tt_eat = ft_atoi(argv[3]);
 	d_dinner->tt_sleep = ft_atoi(argv[4]);
-	d_dinner->died = 0;
+	d_dinner->begin_time = 0;
 	if (argc == 6)
 		d_dinner->num_must_eat = ft_atoi(argv[5]);
 	else
@@ -54,11 +78,14 @@ int main(int argc, char **argv)
 		printf(RED"Input 5 or 6 arguments!"NC);
 		return (0);
 	}
-	// check_argc char and negative
-//	if (check_arg(argc, argv) == -1)
-//		return (0);
+	if (check_arg(argv) == -1)
+		return (0);
 	init_input(argc, argv, &d_dinner);
+	// valid input
+	if (valid_input(&d_dinner) == -1)
+		return (1);
 	print(&d_dinner);
 	create_phs(&d_dinner);
+	printf("the end!\n");
 	return (0);
 }

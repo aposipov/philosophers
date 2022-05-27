@@ -12,7 +12,7 @@
 
 #include "../inc/philo.h"
 
-int	ft_atoi(const char *nptr)  //long
+int	ft_atoi(const char *nptr)
 {
 	int			i;
 	int			sign;
@@ -25,11 +25,6 @@ int	ft_atoi(const char *nptr)  //long
 	while (nptr[i] == '\t' || nptr[i] == '\n' || nptr[i] == '\v' \
 					|| nptr[i] == '\f' || nptr[i] == '\r' || nptr[i] == ' ')
 		i++;
-//	if (nptr[i] < '0' || nptr[i] > '9')
-//	{
-//		printf(RED"check you input\n"NC);
-//		return (-1);
-//	}
 	if (nptr[i] == '-')
 		sign = -1;
 	if (nptr[i] == '-' || nptr[i] == '+')
@@ -41,5 +36,5 @@ int	ft_atoi(const char *nptr)  //long
 		if ((old < 0 && num > 0) || (old > 0 && num < 0))
 			return ((sign == 1) * -1);
 	}
-	return (num * sign);
+	return (int)(num * sign);
 }
