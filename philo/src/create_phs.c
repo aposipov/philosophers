@@ -20,8 +20,7 @@ void	philosoph(void *ph)
 	if (ph_tmp->num % 2 == 0)
 //		my_sleep(ph_tmp->d_dinner.tt_eat); //
 		my_sleep(50);
-	while (*ph_tmp->died != 1 && ph_tmp->count_eat != ph_tmp->d_dinner
-	.num_must_eat)
+	while (*ph_tmp->died != 1 && ph_tmp->count_eat != ph_tmp->d_dinner.num_must_eat ) // && ph_tmp->eat_all != 1
 	{
 		pthread_mutex_lock(ph_tmp->left_fork);
 		print_log(ph_tmp, 11);
@@ -61,7 +60,8 @@ static void	create_loop(t_data *d_dinner, t_philo *ph)
 			printf("not pthread_create! \n");
 			return ;
 		}
-		printf("ph %d th = %lu\n", ph[i].num, (pthread_t)ph[i].th);
+		printf("ph %d th = %ld\n", ph[i].num, (pthread_t)ph[i].th);
+		//pthread_detach(ph->th[i]);
 		i++;
 	}
 	usleep(10); // was 100
@@ -84,21 +84,32 @@ void create_phs(t_data *d_dinner)
 	d_dinner->begin_time = get_time();
 	//print(d_dinner);
 	create_loop(d_dinner, ph);
+//	while (i < d_dinner->num_ph)
+//	{
+//		printf("after loop  th = %lu  \n", (pthread_t)&ph->th[i]);
+//		i++;
+//	}
 	if (ph->d_dinner.num_ph == 1)
 	{
-//		pthread_join(ph->th[0], NULL);
+		pthread_join(ph->th[0], NULL);
 		return ;
 	}
-	//i = 0;
-	pthread_join(ph->th[i], NULL);
+	i = 0;
+	while (i < d_dinner->num_ph)
+	{
+		if (pthread_join(ph->th[i], NULL) != 0)
+			printf("not joined\n");
+		i++;
+	}
 	i = 0;
 	while (i < d_dinner->num_ph)
 	{
 		pthread_mutex_destroy(&ph->fork[i++]);
 	}
 	//printf("after ph = %lu\n", ph->th[i]);
-	printf("after join\n");
-	pthread_mutex_destroy(&ph->message);
+	//printf("after join\n");
+	if (pthread_mutex_destroy(&ph->message) != 0)
+		printf("message not destroy\n");
 	free(ph->th);
 	free(ph->fork);
 	free(ph);

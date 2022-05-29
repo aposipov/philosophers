@@ -83,9 +83,9 @@ int main(int argc, char **argv)
 	init_input(argc, argv, &d_dinner);
 	// valid input
 	if (valid_input(&d_dinner) == -1)
-		return (1);
+		return (0);
 	print(&d_dinner);
 	create_phs(&d_dinner);
-	printf("the end!\n");
+	//printf("the end!\n");
 	return (0);
 }

@@ -28,6 +28,13 @@ int print_log(t_philo *ph_tmp, int n)
 		pthread_mutex_unlock(&ph_tmp->message);
 		return (0);
 	}
+	else if ( n == 5)
+	{
+		printf("all eat!\n");
+		pthread_mutex_unlock(&ph_tmp->message);
+		usleep (1000);
+		return (0);
+	}
 //	else if ((*ph_tmp).died == 1)
 //	{
 //		pthread_mutex_unlock(&ph_tmp->message);
