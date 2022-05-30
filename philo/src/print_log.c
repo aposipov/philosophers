@@ -4,14 +4,14 @@
 
 #include "../inc/philo.h"
 
-void print_take(t_philo *ph_tmp, int c) // debug
-{
-	pthread_mutex_lock(&ph_tmp->message);
-	if (c == 11)
-		printf("%d %d ph take left_fork %p\n", passed_time(ph_tmp->d_dinner.begin_time), ph_tmp->num, ph_tmp->left_fork);
-	else if (c == 12)
-		printf("%d %d ph take right_fork %p\n", passed_time(ph_tmp->d_dinner.begin_time), ph_tmp->num, ph_tmp->right_fork);
-}
+//void print_take(t_philo *ph_tmp, int c) // debug
+//{
+//	pthread_mutex_lock(&ph_tmp->message);
+//	if (c == 11)
+//		printf("%d %d ph take left_fork %p\n", passed_time(ph_tmp->d_dinner.begin_time), ph_tmp->num, ph_tmp->left_fork);
+//	else if (c == 12)
+//		printf("%d %d ph take right_fork %p\n", passed_time(ph_tmp->d_dinner.begin_time), ph_tmp->num, ph_tmp->right_fork);
+//}
 
 int print_log(t_philo *ph_tmp, int n)
 {
@@ -23,7 +23,7 @@ int print_log(t_philo *ph_tmp, int n)
 		time = passed_time(ph_tmp->d_dinner.begin_time) - ph_tmp->last_eat;
 		printf(RED"%d %d ph passed time = %d\n"NC, passed_time
 		(ph_tmp->d_dinner.begin_time), ph_tmp->num, time);
-		printf(RED"%d PH is DIED! FLAG = %d\n"NC, ph_tmp->num, *ph_tmp->died);
+		printf(RED"%d PH is DIED! FLAG = \n"NC, ph_tmp->num);
 		//pthread_detach(*ph_tmp->th);
 		pthread_mutex_unlock(&ph_tmp->message);
 		return (0);
@@ -40,15 +40,17 @@ int print_log(t_philo *ph_tmp, int n)
 //		pthread_mutex_unlock(&ph_tmp->message);
 //		return ;
 //	}
-	else if (n == 11  && *ph_tmp->died != 1)
-		printf("%d %d ph take left_fork %p\n", passed_time(ph_tmp->d_dinner.begin_time), ph_tmp->num, ph_tmp->left_fork);
-	else if (n == 12 && *ph_tmp->died != 1)
-		printf("%d %d ph take right_fork %p\n", passed_time(ph_tmp->d_dinner.begin_time), ph_tmp->num, ph_tmp->right_fork);
+	else if (n == 11  && ph_tmp->d_dinner.flag != 1)
+		printf("%d %d ph take left_fork %p\n", passed_time(ph_tmp->d_dinner
+		.begin_time), ph_tmp->num, ph_tmp->left_fork);
+	else if (n == 12 && ph_tmp->d_dinner.flag != 1)
+		printf("%d %d ph take right_fork %p\n", passed_time(ph_tmp->d_dinner
+		.begin_time), ph_tmp->num, ph_tmp->right_fork);
 	else if (n == 1)
 	{
 		printf(GREEN"%d ph %d is eating\n"NC, passed_time(ph_tmp->d_dinner.begin_time),ph_tmp->num);
-		printf(MAGENTA"ph %d eat count = %d; flag died = %d\n"NC,
-			   ph_tmp->num, ph_tmp->count_eat + 1, *ph_tmp->died);
+		printf(MAGENTA"ph %d eat count = %d; flag died =\n"NC,
+			   ph_tmp->num, ph_tmp->count_eat + 1);
 		//printf(MAGENTA"ph %d adr_flag = %p\n"NC, ph_tmp->num, &ph_tmp->flag);
 		//printf(MAGENTA"ph %d adr_died = %p\n"NC, ph_tmp->num, ph_tmp->died);
 	}

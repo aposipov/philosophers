@@ -14,7 +14,7 @@
 
 void ph_eats(t_philo *ph)
 {
-	if (*ph->died == 1)
+	if (ph->d_dinner.flag == 1)
 	{
 //		pthread_detach(*ph->th);
 		return ;
@@ -27,7 +27,7 @@ void ph_eats(t_philo *ph)
 
 void ph_sleeps(t_philo *ph)
 {
-	if (*ph->died == 1)
+	if (ph->d_dinner.flag == 1)
 	{
 //		pthread_detach(*ph->th);
 		return ;
@@ -39,7 +39,7 @@ void ph_sleeps(t_philo *ph)
 
 void ph_thinks(t_philo *ph)
 {
-	if (*ph->died == 1)
+	if (ph->d_dinner.flag == 1)
 	{
 //		pthread_detach(*ph->th);
 		return ;
@@ -58,12 +58,13 @@ void ph_died(t_philo *ph)
 		{
 			if (ph[i].count_eat == ph[i].d_dinner.num_must_eat)
 			{
-				pthread_join(*ph[i].th, NULL);
+				//pthread_join(*ph[i].th, NULL);
+				ph[i].eat_all = 1;
 				return ;
 			}
 			if (ph[i].d_dinner.tt_die + 1  <= passed_time(ph[i].d_dinner.begin_time) - ph[i].last_eat)
 			{
-				ph[i].flag = 1;
+				ph[i].d_dinner.flag = 1;
 				print_log(ph, 4);
 				return ;
 			}

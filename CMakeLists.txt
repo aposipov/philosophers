@@ -10,7 +10,8 @@ add_executable(philosophers
 		philo/src/time.c
 		philo/src/ph_do.c
 		philo/src/print_log.c
-		philo/src/debug.c)
+		philo/src/debug.c
+		philo/src/utils.c)
 
 #add_executable(philosophers
 #		philo_bonus/src/philo_bonus.c

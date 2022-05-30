@@ -35,20 +35,21 @@ typedef struct s_data{
 	int				tt_sleep;
 	int				num_must_eat;
 	long int		begin_time;
+	int 			flag;
 }	t_data;
 
 typedef struct s_philo{
 	int				num;
 	int				count_eat;
 	int				*died;
-	int				flag;
+	//int				flag;
 	int				last_eat;
 	int 			eat_all;
-	pthread_t		*th;
+	pthread_mutex_t *right_fork;
+	pthread_mutex_t *left_fork;
+	pthread_t		th;
 	pthread_mutex_t	*fork;
 	pthread_mutex_t	message;
-	pthread_mutex_t	*right_fork;
-	pthread_mutex_t	*left_fork;
 	t_data			d_dinner;
 }	t_philo;
 
@@ -57,6 +58,7 @@ int			print_log(t_philo *ph_tmp, int c);
 int			ft_atoi(const char *str);
 
 void		create_phs(t_data *d_dinner);
+int 		malloc_data(t_philo *ph, t_data *d_dinner);
 
 //time
 long int	get_time(void);
