@@ -18,5 +18,5 @@ void	my_sleep(long long time)
 
 	start = get_time();
 	while (get_time() - start < time)
-		usleep(100);
+		usleep(1); // was 100
 }

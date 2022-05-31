@@ -65,6 +65,7 @@ typedef struct s_philo
 int	start_lunch(t_philo *lunch);
 long long	get_time(void);
 void	my_sleep(long long time);
+void	all_free(t_philo *lunch);
 
 /* check */
 int check_arg(int argc, char **argv);

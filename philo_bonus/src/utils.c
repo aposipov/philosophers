@@ -30,3 +30,13 @@ int	ft_atoi(const char *nptr)
 	}
 	return (int)(num * sign);
 }
+
+void	all_free(t_philo *lunch)
+{
+	sem_unlink("print");
+	sem_unlink("fork");
+	sem_close(lunch->s_print);
+	sem_close(lunch->s_fork);
+	free(lunch->pid);
+	//free(lunch);
+}

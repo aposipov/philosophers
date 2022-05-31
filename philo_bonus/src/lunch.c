@@ -17,7 +17,8 @@ void	*death_monitor(void *lunch)
 		{
 			tmp->flag_d = 1;
 			sem_wait(tmp->s_print);
-			printf("%lld %d is died\n", get_time() - tmp->time_start,tmp->name_ph);
+			printf(RED"%lld %d is died\n"NC, get_time() - tmp->time_start,
+			tmp->name_ph);
 			break ;
 		}
 	}
@@ -103,10 +104,11 @@ int	start_lunch(t_philo *lunch)
 				return (1); // exit
 		}
 	}
-	while (waitpid(-1, &status, 0) > 0)
-	{
-		if (WEXITSTATUS(status) == 1)
-			return (killer(lunch));
-	}
+	waitpid(-1, &status, 0);
+//	while (waitpid(-1, &status, 0) > 0)
+//	{
+//		if (WEXITSTATUS(status) == 1)
+//			return (killer(lunch));
+//	}
 	return (0);
 }

@@ -8,7 +8,11 @@ FLAG2 = -pthread
 HEADER = ./inc/philo_bonus.h
 
 SRCS =	./src/philo_bonus.c\
-		./src/ft_atoi.c\
+		./src/check.c\
+		./src/debug.c\
+		./src/lunch.c\
+		./src/time.c\
+		./src/utils.c\
 
 OBJ = $(patsubst %.c, %.o, $(SRCS))
 

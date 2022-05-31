@@ -55,7 +55,7 @@ int	main(int argc, char **argv)
 		return (1);
 	if (start_lunch(&lunch))
 		return (1);
-	//all_free(lunch);
+	all_free(&lunch);
 	printf("the end!\n");
 	return (0);
 }
