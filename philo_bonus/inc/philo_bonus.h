@@ -3,55 +3,67 @@
 #ifndef PHILO_BONUS_H
 # define PHILO_BONUS_H
 
-# include <stdio.h>
-# include <string.h>
-# include <stdlib.h>
-# include <unistd.h>
-# include <pthread.h>
-# include <sys/time.h>
-# include <semaphore.h>
-# include <signal.h>
-# include <fcntl.h>
-# include <sys/wait.h>
-# include <sys/types.h>
+# include <unistd.h>	// usleep, write, fork
+# include <stdio.h>		// printf
+# include <stdlib.h>	// malloc, free, exit
+# include <signal.h>	// kill
+# include <pthread.h>	// pthread_create
+# include <semaphore.h>	// sem_open, sem_close ... sem_unlink
+# include <sys/wait.h>	// waitpid
+# include <sys/time.h>	// gettimeofday
+# include <string.h>	// ??
 
-// * STRUCT DATA * //
+# define NC			"\033[0m"
+# define RED		"\033[31m"
+# define GREEN		"\033[32m"
+# define YELLOW		"\033[33m"
+# define BLUE		"\033[34m"
+# define MAGENTA	"\033[35m"
+# define CYAN		"\033[36m"
+# define DC			"\033[41m"
 
-typedef struct s_data
+typedef struct s_philo
 {
-	int		*pid;
-	int		id_ph;
-	int		nbr_philo;
-	int		tt_die;
-	int		tt_eat;
-	int		tt_sleep;
-	int		must_eat;
-	int		start_time;
-	int		time_left;
-	sem_t	*sem_die;
-	sem_t	*sem_print;
-	sem_t	*sem_fork;
-	sem_t	*sem_odd;
-}				t_data;
+	int			num_ph;
+	int			tt_die;
+	int			tt_eat;
+	int			tt_sleep;
+	int			num_must_eat;
+	int			name;
+	int			nbr_philo_eat;  //
+	int			flag_d;
+	pid_t		*ph;
+	sem_t		*s_print;
+	sem_t		*s_fork;
+	pthread_t	t_monitor;
+	long long	time_start;
+	long long	time_last_eat;
+}				t_philo;
 
-// * PROCESSES UTILS * //
+//typedef struct s_philo
+//{
+//	int				num_of_philos;
+//	int				num_of_forks;
+//	long long		time_to_die;
+//	int				time_to_eat;
+//	int				time_to_sleep;
+//	long long		num_must_eat;
+//	int				is_limited;
+//	unsigned long	start_time;
+//	int				number;
+//	int				eat_status;
+//	int				stop_count;
+//	long long		curr_time;
+//	long long		last_eat_time;
+//	pid_t			process;
+//	sem_t			*sem_death;
+//	sem_t			*sem_fork;
+//	pthread_t		die_detector;
+//}	t_philo;
 
-//void	ft_kill_child(t_data *data, int def);
-//void	ft_sem_close(t_data *data, int def);
-void	ft_check_dead(t_data *data);
-void	ft_meal_check(t_data *data);
-void	ft_child_set(t_data *data);
+/* check */
+int check_arg(int argc, char **argv);
 
-// * UTILS * //
-
-void	ft_write_sms(t_data *data, char *str);
-int		ft_define_args(int argc, char **argv, t_data *data);
-void	ft_process_init(t_data *data);
-int		ft_atoi(const char *str);
-
-// * TIME UTILS * //
-
-int		ft_get_time(void);
-void	ft_usleep(t_data *data, int sleep);
+int	ft_atoi(const char *nptr);
 
 #endif

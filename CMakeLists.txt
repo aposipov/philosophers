@@ -17,7 +17,7 @@ add_executable(philosophers
 		philo_bonus/src/philo_bonus.c
 		philo_bonus/src/utils.c
 		philo_bonus/src/time.c
-		philo_bonus/src/process.c)
+		philo_bonus/src/process.c philo_bonus/src/check.c)
 
 #add_executable(philosophers training/test.c
 #		training/test2.c)
