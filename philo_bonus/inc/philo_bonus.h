@@ -11,7 +11,8 @@
 # include <semaphore.h>	// sem_open, sem_close ... sem_unlink
 # include <sys/wait.h>	// waitpid
 # include <sys/time.h>	// gettimeofday
-# include <string.h>	// ??
+# include <fcntl.h>
+//# include <string.h>	// ??
 
 # define NC			"\033[0m"
 # define RED		"\033[31m"
@@ -29,10 +30,10 @@ typedef struct s_philo
 	int			tt_eat;
 	int			tt_sleep;
 	int			num_must_eat;
-	int			name;
-	int			nbr_philo_eat;  //
+	int			name_ph;
+	int			num_philo_eat;  //
 	int			flag_d;
-	pid_t		*ph;
+	pid_t		*pid;
 	sem_t		*s_print;
 	sem_t		*s_fork;
 	pthread_t	t_monitor;
@@ -61,9 +62,18 @@ typedef struct s_philo
 //	pthread_t		die_detector;
 //}	t_philo;
 
+int	start_lunch(t_philo *lunch);
+long long	get_time(void);
+void	my_sleep(long long time);
+
 /* check */
 int check_arg(int argc, char **argv);
 
+/* utils */
 int	ft_atoi(const char *nptr);
+
+
+/* debug*/
+void	print(t_philo *lunch);
 
 #endif

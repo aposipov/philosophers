@@ -11,7 +11,7 @@ int check_input(int argc, char **argv)
 		printf(RED"ph must be more than 0 but less 200\n"NC);
 		return(1);
 	}
-	else if (ft_atoi(argv[5]) == 0)
+	else if (argc == 6  && ft_atoi(argv[5]) == 0)
 	{
 		printf(RED"time must eat more tnan 0\n"NC);
 		return (1);
