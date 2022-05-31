@@ -23,7 +23,8 @@ int print_log(t_philo *ph_tmp, int n)
 		time = passed_time(ph_tmp->d_dinner.begin_time) - ph_tmp->last_eat;
 		printf(RED"%d %d ph passed time = %d\n"NC, passed_time
 		(ph_tmp->d_dinner.begin_time), ph_tmp->num, time);
-		printf(RED"%d PH is DIED! FLAG = \n"NC, ph_tmp->num);
+		printf(RED"%d PH is DIED! FLAG = %d\n"NC, ph_tmp->num,
+			   ph_tmp->d_dinner.flag);
 		//pthread_detach(*ph_tmp->th);
 		pthread_mutex_unlock(&ph_tmp->message);
 		return (0);
@@ -49,8 +50,8 @@ int print_log(t_philo *ph_tmp, int n)
 	else if (n == 1)
 	{
 		printf(GREEN"%d ph %d is eating\n"NC, passed_time(ph_tmp->d_dinner.begin_time),ph_tmp->num);
-		printf(MAGENTA"ph %d eat count = %d; flag died =\n"NC,
-			   ph_tmp->num, ph_tmp->count_eat + 1);
+		printf(MAGENTA"ph %d eat count = %d; flag died = %d\n"NC,
+			   ph_tmp->num, ph_tmp->count_eat + 1, ph_tmp->d_dinner.flag);
 		//printf(MAGENTA"ph %d adr_flag = %p\n"NC, ph_tmp->num, &ph_tmp->flag);
 		//printf(MAGENTA"ph %d adr_died = %p\n"NC, ph_tmp->num, ph_tmp->died);
 	}

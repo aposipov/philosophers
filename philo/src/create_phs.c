@@ -20,9 +20,8 @@ void	routine(void *ph)
 	if (ph_tmp->num % 2 == 0)
 		my_sleep(ph_tmp->d_dinner.tt_eat); //
 //		my_sleep(50);
-	while (ph_tmp->d_dinner.flag != 1 &&  ph_tmp->eat_all != 1) // &&
-		// ph_tmp->eat_all
-		// != 1 // ph_tmp->count_eat != ph_tmp->d_dinner.num_must_eat &&
+	while (ph_tmp->d_dinner.flag != 1 &&  ph_tmp->count_eat != ph_tmp->d_dinner.num_must_eat) // &&ph_tmp->eat_all!= 1
+		// ph_tmp->count_eat != ph_tmp->d_dinner.num_must_eat &&
 	{
 		pthread_mutex_lock(ph_tmp->left_fork);
 		print_log(ph_tmp, 11);

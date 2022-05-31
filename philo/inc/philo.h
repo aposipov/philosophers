@@ -28,6 +28,8 @@
 # define CYAN		"\033[36m"
 # define DC			"\033[41m"
 
+
+
 typedef struct s_data{
 	int				num_ph;
 	int				tt_die;
