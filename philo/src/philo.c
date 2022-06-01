@@ -12,12 +12,12 @@
 
 #include "../inc/philo.h"
 
-int check_input(t_data *d_dinner)
+int	check_input(t_data *d_dinner)
 {
 	if (d_dinner->num_ph == 0 || d_dinner->num_ph > 200)
 	{
 		printf(RED"ph must be more than 0 but less 200\n"NC);
-		return(1);
+		return (1);
 	}
 	else if (d_dinner->num_must_eat == 0)
 	{
@@ -27,32 +27,33 @@ int check_input(t_data *d_dinner)
 	return (0);
 }
 
-int check_digit(const char *str)
+int	check_digit(const char *str)
 {
-	int i = 0;
+	int	i;
 
+	i = 0;
 	while (str[i] != '\0')
 	{
 		if (str[i] < '0' || str[i] > '9')
-			return (-1);
+			return (1);
 		i++;
 	}
 	return (0);
 }
 
-int check_arg(int argc, char **argv)
+int	check_arg(int argc, char **argv)
 {
-	int i;
+	int	i;
 
 	i = 1;
-	if (argc < 5 || argc >6)
+	if (argc < 5 || argc > 6)
 	{
 		printf(RED"Input 5 or 6 arguments!\n"NC);
 		return (1);
 	}
 	while (argv[i] != NULL)
 	{
-		if (check_digit(argv[i]) == -1)
+		if (check_digit(argv[i]))
 		{
 			printf(RED"Check your arguments!\n"NC);
 			return (1);
@@ -62,7 +63,7 @@ int check_arg(int argc, char **argv)
 	return (0);
 }
 
-void init_input(int argc, char **argv, t_data *d_dinner)
+void	init_input(int argc, char **argv, t_data *d_dinner)
 {
 	d_dinner->num_ph = ft_atoi(argv[1]);
 	d_dinner->tt_die = ft_atoi(argv[2]);
@@ -76,22 +77,15 @@ void init_input(int argc, char **argv, t_data *d_dinner)
 		d_dinner->num_must_eat = -1;
 }
 
-int main(int argc, char **argv)
+int	main(int argc, char **argv)
 {
 	t_data	d_dinner;
-	pthread_t self;
-	self = pthread_self();
-	printf("hello %lu\n", self);
+
 	if (check_arg(argc, argv))
 		return (1);
 	init_input(argc, argv, &d_dinner);
 	if (check_input(&d_dinner))
 		return (1);
-
-	print(&d_dinner);
-
 	create_phs(&d_dinner);
-
-	printf("the end!\n");
 	return (0);
 }

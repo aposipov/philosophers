@@ -28,39 +28,33 @@
 # define CYAN		"\033[36m"
 # define DC			"\033[41m"
 
-
-
 typedef struct s_data{
 	int				num_ph;
 	int				tt_die;
 	int				tt_eat;
 	int				tt_sleep;
 	int				num_must_eat;
+	int				all_eat;
 	long int		begin_time;
-	int 			flag_d;
+	int				flag_d;
 }	t_data;
 
 typedef struct s_philo{
 	int				num;
 	int				count_eat;
-	int				*died;
-	int				flag;
 	int				last_eat;
-	int 			eat_all;
-	pthread_mutex_t *right_fork;
-	pthread_mutex_t *left_fork;
-	pthread_t		th;
-	pthread_mutex_t	*fork;
-	pthread_mutex_t	message;
 	t_data			*d_dinner;
+	pthread_t		th;
+	pthread_mutex_t	message;
+	pthread_mutex_t	*fork;
+	pthread_mutex_t	*right_fork;
+	pthread_mutex_t	*left_fork;
 }	t_philo;
 
 //print log
-int			print_log(t_philo *ph_tmp, int c);
+void		print_log(t_philo *ph_tmp, int c);
 int			ft_atoi(const char *str);
-
 void		create_phs(t_data *d_dinner);
-int 		malloc_data(t_philo *ph, t_data *d_dinner);
 
 //time
 long int	get_time(void);
@@ -72,9 +66,5 @@ void		ph_eats(t_philo *ph);
 void		ph_sleeps(t_philo *ph);
 void		ph_thinks(t_philo *ph);
 void		ph_died(t_philo *ph);
-
-//debug
-void		print(t_data *d_dinner);
-void		print_put(t_philo *ph_tmp, int c);
 
 #endif

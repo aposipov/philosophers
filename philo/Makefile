@@ -12,7 +12,6 @@ SRCS =	./src/philo.c\
 		./src/debug.c\
 		./src/ph_do.c\
 		./src/print_log.c\
-		./src/time.c\
 		./src/utils.c\
 
 OBJ = $(patsubst %.c, %.o, $(SRCS))

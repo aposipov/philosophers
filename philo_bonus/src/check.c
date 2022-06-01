@@ -35,7 +35,7 @@ int	check_digit(const char *str)
 	while (str[i] != '\0')
 	{
 		if (str[i] < '0' || str[i] > '9')
-			return (-1);
+			return (1);
 		i++;
 	}
 	return (0);
@@ -53,7 +53,7 @@ int	check_arg(int argc, char **argv)
 	}
 	while (argv[i] != NULL)
 	{
-		if (check_digit(argv[i]) == -1)
+		if (check_digit(argv[i]))
 		{
 			printf(RED"Check your arguments!\n"NC);
 			return (1);

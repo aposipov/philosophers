@@ -1,6 +1,14 @@
-//
-// Created by user on 08.05.22.
-//
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   debug.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lchristi <lchristi@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/06/01 22:15:22 by lchristi          #+#    #+#             */
+/*   Updated: 2022/06/01 22:15:25 by lchristi         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "../inc/philo.h"
 
@@ -20,15 +28,16 @@ void	print_put(t_philo *ph_tmp, int c)
 	pthread_mutex_lock(&ph_tmp->message);
 	if (c == 11)
 	{
-		printf("%d %d ph PUT left_fork %p\n", passed_time
-		(ph_tmp->d_dinner->begin_time), ph_tmp->num,ph_tmp->left_fork);
+		printf("%d %d ph PUT left_fork %p\n", \
+		passed_time(ph_tmp->d_dinner->begin_time), \
+		ph_tmp->num, ph_tmp->left_fork);
 		pthread_mutex_unlock(&ph_tmp->message);
 	}
 	else if (c == 12)
 	{
-		printf("%d %d ph PUT right_fork %p\n", passed_time
-		(ph_tmp->d_dinner->begin_time), ph_tmp->num, ph_tmp->right_fork);
+		printf("%d %d ph PUT right_fork %p\n", \
+		passed_time(ph_tmp->d_dinner->begin_time), \
+		ph_tmp->num, ph_tmp->right_fork);
 		pthread_mutex_unlock(&ph_tmp->message);
 	}
-
 }

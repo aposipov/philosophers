@@ -12,21 +12,6 @@
 
 #include "../inc/philo.h"
 
-//int 		malloc_data(t_philo *ph, t_data *d_dinner)
-//{
-//	ph = (t_philo *)malloc(d_dinner->num_ph * sizeof(t_philo));
-//	if (!ph)
-//		return (1);
-//	ph->th = (pthread_t *)malloc(d_dinner->num_ph * (sizeof(pthread_t)));
-//	if (!ph->th)
-//		return (1);
-//	ph->fork = (pthread_mutex_t *)malloc(d_dinner->num_ph * sizeof
-//			(pthread_mutex_t));
-//	if (!ph->fork)
-//		return (1);
-//	return (0);
-//}
-
 int	ft_atoi(const char *nptr)
 {
 	int			i;
@@ -52,4 +37,26 @@ int	ft_atoi(const char *nptr)
 			return ((sign == 1) * -1);
 	}
 	return ((int)(num * sign));
+}
+
+long int	get_time(void)
+{
+	struct timeval	t_start;
+
+	gettimeofday(&t_start, NULL);
+	return (t_start.tv_sec * 1000 + t_start.tv_usec / 1000);
+}
+
+void	my_sleep(int ms)
+{
+	long	start;
+
+	start = get_time();
+	while (get_time() - start < ms)
+		usleep(1);
+}
+
+int	passed_time(long int begin_time)
+{
+	return ((int)(get_time() - begin_time));
 }
