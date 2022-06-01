@@ -68,7 +68,7 @@ void init_input(int argc, char **argv, t_data *d_dinner)
 	d_dinner->tt_die = ft_atoi(argv[2]);
 	d_dinner->tt_eat = ft_atoi(argv[3]);
 	d_dinner->tt_sleep = ft_atoi(argv[4]);
-	d_dinner->flag = 0;
+	d_dinner->flag_d = 0;
 	d_dinner->begin_time = 0;
 	if (argc == 6)
 		d_dinner->num_must_eat = ft_atoi(argv[5]);
@@ -79,7 +79,9 @@ void init_input(int argc, char **argv, t_data *d_dinner)
 int main(int argc, char **argv)
 {
 	t_data	d_dinner;
-
+	pthread_t self;
+	self = pthread_self();
+	printf("hello %lu\n", self);
 	if (check_arg(argc, argv))
 		return (1);
 	init_input(argc, argv, &d_dinner);
@@ -90,6 +92,6 @@ int main(int argc, char **argv)
 
 	create_phs(&d_dinner);
 
-	//printf("the end!\n");
+	printf("the end!\n");
 	return (0);
 }

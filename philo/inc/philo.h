@@ -37,14 +37,14 @@ typedef struct s_data{
 	int				tt_sleep;
 	int				num_must_eat;
 	long int		begin_time;
-	int 			flag;
+	int 			flag_d;
 }	t_data;
 
 typedef struct s_philo{
 	int				num;
 	int				count_eat;
 	int				*died;
-	//int				flag;
+	int				flag;
 	int				last_eat;
 	int 			eat_all;
 	pthread_mutex_t *right_fork;
@@ -52,7 +52,7 @@ typedef struct s_philo{
 	pthread_t		th;
 	pthread_mutex_t	*fork;
 	pthread_mutex_t	message;
-	t_data			d_dinner;
+	t_data			*d_dinner;
 }	t_philo;
 
 //print log

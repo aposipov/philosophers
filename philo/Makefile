@@ -8,7 +8,6 @@ FLAG2 = -pthread
 HEADER = ./inc/philo.h
 
 SRCS =	./src/philo.c\
-		./src/ft_atoi.c\
 		./src/create_phs.c\
 		./src/debug.c\
 		./src/ph_do.c\
@@ -22,7 +21,7 @@ RED= \033[4;31m
 GREEN= \033[0;32m
 NC= \033[0;0m
 
-.PHONY:	all clean fclean re launch norm check
+.PHONY:	all clean fclean re norm
 
 all:	$(NAME)
 
@@ -43,13 +42,5 @@ fclean:		clean
 
 re:			fclean all
 
-launch:		$(OBJ)
-			@$(CC) $(FLAGS) $(OBJ) -o $(NAME)
-			./philo 3 205 100 100
-
 norm:
 			@norminette $(HEADER) $(SRCS)
-
-check:		$(OBJ)
-			$(CC) $(FLAGS) $(FLAG1) $(OBJ) -o $(NAME)
-			./philo 3 205 100 100
