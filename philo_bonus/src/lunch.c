@@ -17,7 +17,7 @@ void	*death_monitor(void *lunch)
 		{
 			tmp->flag_d = 1;
 			sem_wait(tmp->s_print);
-			printf(RED"%lld %d is died\n"NC, get_time() - tmp->time_start,
+			printf(RED"%lld %d died\n"NC, get_time() - tmp->time_start,
 			tmp->name_ph);
 			break ;
 		}
@@ -28,40 +28,55 @@ void	*death_monitor(void *lunch)
 		exit (0);
 }
 
-void	print_log(t_philo *lunch, char *str)
+void	print_log(t_philo *lunch, int c)
 {
-	sem_wait(lunch->s_print);
-	printf("%lld %d %s\n",get_time() - lunch->time_start, lunch->name_ph, str);
-	sem_post(lunch->s_print);
+	if (c == 1)
+	{
+		sem_wait(lunch->s_print);
+		printf(NC"%lld %d has taken a fork\n"NC, get_time() - lunch->time_start,
+			   lunch->name_ph);
+		sem_post(lunch->s_print);
+	}
+	else if (c == 2)
+	{
+		sem_wait(lunch->s_print);
+		printf(GREEN"%lld %d is eating\n"NC, get_time() - lunch->time_start,
+			   lunch->name_ph);
+		sem_post(lunch->s_print);
+	}
+	else if (c == 3)
+	{
+		sem_wait(lunch->s_print);
+		printf(BLUE"%lld %d is sleeping\n"NC, get_time() - lunch->time_start,
+			   lunch->name_ph);
+		sem_post(lunch->s_print);
+	}
+	else if (c == 4)
+	{
+		sem_wait(lunch->s_print);
+		printf(CYAN"%lld %d is thinking\n"NC, get_time() - lunch->time_start,
+			   lunch->name_ph);
+		sem_post(lunch->s_print);
+	}
 }
 
 int	eat_sleep_think(t_philo *lunch)
 {
 	sem_wait(lunch->s_fork);
-	print_log(lunch, "has taken a fork");
+	print_log(lunch, 1);
 	if (lunch->num_ph == 1)
 		return (sem_post(lunch->s_fork), 1); //
 	sem_wait(lunch->s_fork);
-	print_log(lunch, "has taken a fork");
-	print_log(lunch, "is eating");
+	print_log(lunch, 1);
+	print_log(lunch, 2);
 	lunch->time_last_eat = get_time();
 	my_sleep(lunch->tt_eat);
 	sem_post(lunch->s_fork);
 	sem_post(lunch->s_fork);
 	lunch->num_philo_eat++;
-	print_log(lunch, "is sleeping");
+	print_log(lunch, 3);
 	my_sleep(lunch->tt_sleep);
-	print_log(lunch, "is thinking");
-	return (0);
-}
-
-int	killer(t_philo *lunch)
-{
-	int	i;
-
-	i = -1;
-	while (++i < lunch->num_ph)
-		kill(lunch->pid[i], SIGKILL);
+	print_log(lunch, 4);
 	return (0);
 }
 
@@ -69,8 +84,8 @@ int	philo_lunch(t_philo *lunch)
 {
 	if (pthread_create(&lunch->t_monitor, NULL, &death_monitor, lunch))
 		return (1);
-	if (lunch->name_ph % 2 == 1)
-		usleep(lunch->tt_eat);
+	if (lunch->name_ph % 2 == 0)
+		usleep(lunch->tt_die / 2);
 	while (1)
 	{
 		if (lunch->num_must_eat)
@@ -104,11 +119,11 @@ int	start_lunch(t_philo *lunch)
 				return (1); // exit
 		}
 	}
-	waitpid(-1, &status, 0);
-//	while (waitpid(-1, &status, 0) > 0)
-//	{
-//		if (WEXITSTATUS(status) == 1)
-//			return (killer(lunch));
-//	}
+	//waitpid(-1, &status, 0);
+	while (waitpid(-1, &status, 0) > 0)
+	{
+		if (WEXITSTATUS(status) == 1)
+			return (all_kill(lunch));
+	}
 	return (0);
 }

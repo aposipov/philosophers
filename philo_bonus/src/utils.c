@@ -38,5 +38,14 @@ void	all_free(t_philo *lunch)
 	sem_close(lunch->s_print);
 	sem_close(lunch->s_fork);
 	free(lunch->pid);
-	//free(lunch);
+}
+
+int	all_kill(t_philo *lunch)
+{
+	int	i;
+
+	i = -1;
+	while (++i < lunch->num_ph)
+		kill(lunch->pid[i], SIGKILL);
+	return (0);
 }
