@@ -1,4 +1,14 @@
-
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: lchristi <lchristi@student.42.fr>          +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2022/06/01 13:31:09 by lchristi          #+#    #+#              #
+#    Updated: 2022/06/01 13:31:12 by lchristi         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
 
 NAME = philo_bonus
 CC = gcc
@@ -20,7 +30,7 @@ RED= \033[4;31m
 GREEN= \033[0;32m
 NC= \033[0;0m
 
-.PHONY:	all clean fclean re launch norm check
+.PHONY:	all clean fclean re norm
 
 all:	$(NAME)
 
@@ -41,13 +51,5 @@ fclean:		clean
 
 re:			fclean all
 
-launch:		$(OBJ)
-			@$(CC) $(FLAGS) $(OBJ) -o $(NAME)
-			./philo 3 205 100 100
-
 norm:
 			@norminette $(HEADER) $(SRCS)
-
-check:		$(OBJ)
-			$(CC) $(FLAGS) $(FLAG1) $(OBJ) -o $(NAME)
-			./philo 3 205 100 100
