@@ -1,6 +1,14 @@
-//
-// Created by user on 22.05.22.
-//
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   time.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lchristi <lchristi@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/06/01 13:15:28 by lchristi          #+#    #+#             */
+/*   Updated: 2022/06/01 13:15:30 by lchristi         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "../inc/philo_bonus.h"
 
@@ -18,5 +26,5 @@ void	my_sleep(long long time)
 
 	start = get_time();
 	while (get_time() - start < time)
-		usleep(1); // was 100
+		usleep(1);
 }

@@ -1,6 +1,15 @@
-//
-// Created by user on 22.05.22.
-//
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   lunch.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lchristi <lchristi@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/06/01 13:04:04 by lchristi          #+#    #+#             */
+/*   Updated: 2022/06/01 13:04:06 by lchristi         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../inc/philo_bonus.h"
 
 void	*death_monitor(void *lunch)
@@ -11,13 +20,13 @@ void	*death_monitor(void *lunch)
 	while (1)
 	{
 		if (tmp->num_must_eat)
-			if (tmp->num_philo_eat == tmp->num_must_eat)
+			if (tmp->philo_eat == tmp->num_must_eat)
 				break ;
 		if (get_time() - tmp->time_last_eat > tmp->tt_die)
 		{
 			tmp->flag_d = 1;
 			sem_wait(tmp->s_print);
-			printf(RED"%lld %d died\n"NC, get_time() - tmp->time_start,
+			printf(RED"%lld %d died\n"NC, get_time() - tmp->time_start, \
 			tmp->name_ph);
 			break ;
 		}
@@ -28,55 +37,26 @@ void	*death_monitor(void *lunch)
 		exit (0);
 }
 
-void	print_log(t_philo *lunch, int c)
-{
-	if (c == 1)
-	{
-		sem_wait(lunch->s_print);
-		printf(NC"%lld %d has taken a fork\n"NC, get_time() - lunch->time_start,
-			   lunch->name_ph);
-		sem_post(lunch->s_print);
-	}
-	else if (c == 2)
-	{
-		sem_wait(lunch->s_print);
-		printf(GREEN"%lld %d is eating\n"NC, get_time() - lunch->time_start,
-			   lunch->name_ph);
-		sem_post(lunch->s_print);
-	}
-	else if (c == 3)
-	{
-		sem_wait(lunch->s_print);
-		printf(BLUE"%lld %d is sleeping\n"NC, get_time() - lunch->time_start,
-			   lunch->name_ph);
-		sem_post(lunch->s_print);
-	}
-	else if (c == 4)
-	{
-		sem_wait(lunch->s_print);
-		printf(CYAN"%lld %d is thinking\n"NC, get_time() - lunch->time_start,
-			   lunch->name_ph);
-		sem_post(lunch->s_print);
-	}
-}
-
 int	eat_sleep_think(t_philo *lunch)
 {
 	sem_wait(lunch->s_fork);
-	print_log(lunch, 1);
+	print_fork(lunch, 1);
 	if (lunch->num_ph == 1)
-		return (sem_post(lunch->s_fork), 1); //
+	{
+		sem_post(lunch->s_fork);
+		return (1);
+	}
 	sem_wait(lunch->s_fork);
-	print_log(lunch, 1);
-	print_log(lunch, 2);
+	print_fork(lunch, 1);
+	print_est(lunch, 2);
 	lunch->time_last_eat = get_time();
 	my_sleep(lunch->tt_eat);
 	sem_post(lunch->s_fork);
 	sem_post(lunch->s_fork);
-	lunch->num_philo_eat++;
-	print_log(lunch, 3);
+	lunch->philo_eat++;
+	print_est(lunch, 3);
 	my_sleep(lunch->tt_sleep);
-	print_log(lunch, 4);
+	print_est(lunch, 4);
 	return (0);
 }
 
@@ -89,13 +69,13 @@ int	philo_lunch(t_philo *lunch)
 	while (1)
 	{
 		if (lunch->num_must_eat)
-			if (lunch->num_philo_eat == lunch->num_must_eat)
+			if (lunch->philo_eat == lunch->num_must_eat)
 				break ;
 		if (eat_sleep_think(lunch))
 			break ;
 	}
 	if (pthread_join(lunch->t_monitor, NULL))
-		return (1); // exit
+		return (1);
 	return (0);
 }
 
@@ -110,16 +90,15 @@ int	start_lunch(t_philo *lunch)
 	{
 		lunch->pid[i] = fork();
 		if (lunch->pid[i] == -1)
-			return (1); // exit
+			return (1);
 		if (lunch->pid[i] == 0)
 		{
 			lunch->name_ph = i + 1;
 			lunch->time_last_eat = lunch->time_start;
-			if (philo_lunch(lunch)) //
-				return (1); // exit
+			if (philo_lunch(lunch))
+				return (1);
 		}
 	}
-	//waitpid(-1, &status, 0);
 	while (waitpid(-1, &status, 0) > 0)
 	{
 		if (WEXITSTATUS(status) == 1)

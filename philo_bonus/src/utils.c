@@ -1,6 +1,14 @@
-//
-// Created by user on 22.05.22.
-//
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   utils.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lchristi <lchristi@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/06/01 13:16:40 by lchristi          #+#    #+#             */
+/*   Updated: 2022/06/01 13:16:43 by lchristi         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "../inc/philo_bonus.h"
 
@@ -28,7 +36,7 @@ int	ft_atoi(const char *nptr)
 		if ((old < 0 && num > 0) || (old > 0 && num < 0))
 			return ((sign == 1) * -1);
 	}
-	return (int)(num * sign);
+	return ((int)(num * sign));
 }
 
 void	all_free(t_philo *lunch)
@@ -48,4 +56,40 @@ int	all_kill(t_philo *lunch)
 	while (++i < lunch->num_ph)
 		kill(lunch->pid[i], SIGKILL);
 	return (0);
+}
+
+void	print_fork(t_philo *lunch, int c)
+{
+	if (c == 1)
+	{
+		sem_wait(lunch->s_print);
+		printf(NC"%lld %d has taken a fork\n"NC, get_time() - \
+		lunch->time_start, lunch->name_ph);
+		sem_post(lunch->s_print);
+	}
+}
+
+void	print_est(t_philo *lunch, int c)
+{
+	if (c == 2)
+	{
+		sem_wait(lunch->s_print);
+		printf(GREEN"%lld %d is eating\n"NC, get_time() - \
+		lunch->time_start, lunch->name_ph);
+		sem_post(lunch->s_print);
+	}
+	else if (c == 3)
+	{
+		sem_wait(lunch->s_print);
+		printf(BLUE"%lld %d is sleeping\n"NC, get_time() - \
+		lunch->time_start, lunch->name_ph);
+		sem_post(lunch->s_print);
+	}
+	else if (c == 4)
+	{
+		sem_wait(lunch->s_print);
+		printf(CYAN"%lld %d is thinking\n"NC, get_time() - \
+		lunch->time_start, lunch->name_ph);
+		sem_post(lunch->s_print);
+	}
 }

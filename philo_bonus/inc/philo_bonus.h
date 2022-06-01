@@ -1,4 +1,14 @@
-
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   philo_bonus.h                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lchristi <lchristi@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/06/01 12:51:11 by lchristi          #+#    #+#             */
+/*   Updated: 2022/06/01 12:52:45 by lchristi         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #ifndef PHILO_BONUS_H
 # define PHILO_BONUS_H
@@ -30,7 +40,7 @@ typedef struct s_philo
 	int			tt_sleep;
 	int			num_must_eat;
 	int			name_ph;
-	int			num_philo_eat;  //
+	int			philo_eat;
 	int			flag_d;
 	pid_t		*pid;
 	sem_t		*s_print;
@@ -40,15 +50,17 @@ typedef struct s_philo
 	long long	time_last_eat;
 }				t_philo;
 
-int	start_lunch(t_philo *lunch);
+int			start_lunch(t_philo *lunch);
+void		my_sleep(long long time);
+void		print_fork(t_philo *lunch, int c);
+void		print_est(t_philo *lunch, int c);
+void		all_free(t_philo *lunch);
+int			all_kill(t_philo *lunch);
+int			check_arg(int argc, char **argv);
+int			ft_atoi(const char *nptr);
 long long	get_time(void);
-void	my_sleep(long long time);
-void	all_free(t_philo *lunch);
-int	all_kill(t_philo *lunch);
-int check_arg(int argc, char **argv);
-int	ft_atoi(const char *nptr);
 
 /* debug*/
-void	print(t_philo *lunch);
+void		print(t_philo *lunch);
 
 #endif
