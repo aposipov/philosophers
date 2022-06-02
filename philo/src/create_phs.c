@@ -50,6 +50,7 @@ static void	create_loop(t_data *d_dinner, t_philo *ph)
 		pthread_mutex_init(&ph->fork[i], NULL);
 		ph[i].d_dinner = d_dinner;
 		ph[i].num = i + 1;
+		ph[i].message = ph->message;
 		ph[i].right_fork = &ph->fork[i];
 		ph[i].last_eat = 0;
 		ph[i].count_eat = 0;
@@ -63,6 +64,7 @@ static void	create_loop(t_data *d_dinner, t_philo *ph)
 	}
 	usleep(1);
 	ph_died(ph);
+	join_th(ph);
 	return ;
 }
 

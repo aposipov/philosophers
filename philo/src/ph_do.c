@@ -45,7 +45,7 @@ void	join_th(t_philo *ph)
 	while (i < ph->d_dinner->num_ph)
 	{
 		if (pthread_join(ph[i].th, NULL))
-			printf("not func join\n");
+			printf("not join join_th\n");
 		i++;
 	}
 	return ;
@@ -63,7 +63,6 @@ void	ph_died(t_philo *ph)
 			if (ph[i].count_eat == ph[i].d_dinner->num_must_eat)
 			{
 				ph[i].d_dinner->all_eat = 1;
-				join_th(ph);
 				return ;
 			}
 			if (ph[i].d_dinner->tt_die + 1 <= \
@@ -71,7 +70,6 @@ void	ph_died(t_philo *ph)
 			{
 				ph[i].d_dinner->flag_d = 1;
 				print_log(&ph[i], 4);
-				join_th(ph);
 				return ;
 			}
 			i++;

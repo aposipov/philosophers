@@ -66,5 +66,6 @@ void		ph_eats(t_philo *ph);
 void		ph_sleeps(t_philo *ph);
 void		ph_thinks(t_philo *ph);
 void		ph_died(t_philo *ph);
+void		join_th(t_philo *ph);
 
 #endif

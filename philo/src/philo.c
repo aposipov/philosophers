@@ -70,6 +70,7 @@ void	init_input(int argc, char **argv, t_data *d_dinner)
 	d_dinner->tt_eat = ft_atoi(argv[3]);
 	d_dinner->tt_sleep = ft_atoi(argv[4]);
 	d_dinner->flag_d = 0;
+	d_dinner->all_eat = 0;
 	d_dinner->begin_time = 0;
 	if (argc == 6)
 		d_dinner->num_must_eat = ft_atoi(argv[5]);
